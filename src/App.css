@@ -1,0 +1,62 @@
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.container {
+  width:80%;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.search {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 30px;
+}
+
+.container > div > button {
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(4, 126, 213);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+}
+
+.container> div > button:hover {
+  background-color: #45a049;
+}
+
+.todos {
+  border: 1px solid #ddd;
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+}
+.completed-items{
+  font-weight: bold;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Todo.css */
+
