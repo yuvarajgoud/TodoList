@@ -3,6 +3,8 @@ import Todo from './components/Todo'
 import './App.css'
 function App() {
   const [completed,setCompleted]=useState(0);
+  const [editableTodo,setEditableTodo]=useState(null);
+  const [task,setTask]=useState({});
   const [todos,setTodos]=useState(() => {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
@@ -21,14 +23,20 @@ function App() {
     setCompleted(complete.length)
   }, [todos]);
   function addTodo(){
-    if(inputRef.current.value !== ""){
-      if(todos.length === 0){
-        setTodos([...todos, { id : 0,todo:inputRef.current.value,isCompleted:false}])
-      }
-      else {
-        setTodos([...todos, { id :todos.length,todo:inputRef.current.value,isCompleted:false}])
-      }
-      inputRef.current.value=""
+    if(editableTodo){
+      editTodo()
+    } else {
+      if(inputRef.current.value !== ""){
+        if(todos.length === 0){
+          setTask({ id : 0,todo:inputRef.current.value,isCompleted:false})
+          setTodos([...todos, task])
+        }
+        else {
+          setTask({ id :todos.length,todo:inputRef.current.value,isCompleted:false})
+          setTodos([...todos, task])
+        }
+          inputRef.current.value=""
+        }  
     }
   }
   function deleteTodo(id){
@@ -63,14 +71,27 @@ function App() {
        setTodos(updatedTodos)
     }
   }
+  function updateTodo(todo){
+    inputRef.current.value=todo.todo
+    setEditableTodo(todo)
+  }
+  function editTodo(){
+    const index=todos.findIndex((item,id)=>item.id===editableTodo.id)
+    const newTodos=[...todos]
+    const todo={...editableTodo}
+    newTodos.splice(index,1,{...todo,todo:inputRef.current.value})
+    setTodos(newTodos)
+    setEditableTodo(null)
+    inputRef.current.value=''
+  }
   
   return (
     <>
       <div className='container'>
         <h2>Todo List</h2>
         <div className='search'>
-          <input type="text" ref={inputRef}/>
-          <button onClick={addTodo}>Add</button>
+          <input type="text" ref={inputRef} />
+          <button onClick={addTodo}>{editableTodo ? 'Edit' : 'Add' }</button>
         </div>
         <div className='completed-items'>
           <span>Completed items : {completed} / {todos.length}</span>
@@ -80,7 +101,7 @@ function App() {
         </div>
         <div className='todos'>
             {todos.map((item,id)=>(
-              <Todo id={id} todo={item} deleteTodo={deleteTodo} completeTodo={completeTodo} moveUp={moveUp} moveDown={moveDown}/>
+              <Todo id={id} todo={item} updateTodo={updateTodo} deleteTodo={deleteTodo} completeTodo={completeTodo} moveUp={moveUp} moveDown={moveDown}/>
             )
             )}
         </div>
