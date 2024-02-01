@@ -4,7 +4,6 @@ import './App.css'
 function App() {
   const [completed,setCompleted]=useState(0);
   const [editableTodo,setEditableTodo]=useState(null);
-  const [task,setTask]=useState({});
   const [todos,setTodos]=useState(() => {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
@@ -25,15 +24,15 @@ function App() {
   function addTodo(){
     if(editableTodo){
       editTodo()
+      console.log("Inside Edit")
     } else {
+      console.log("Inside Add")
       if(inputRef.current.value !== ""){
         if(todos.length === 0){
-          setTask({ id : 0,todo:inputRef.current.value,isCompleted:false})
-          setTodos([...todos, task])
+          setTodos([...todos, { id : 0,todo:inputRef.current.value,isCompleted:false}])
         }
         else {
-          setTask({ id :todos.length,todo:inputRef.current.value,isCompleted:false})
-          setTodos([...todos, task])
+          setTodos([...todos, { id :todos.length,todo:inputRef.current.value,isCompleted:false}])
         }
           inputRef.current.value=""
         }  
