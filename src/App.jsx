@@ -29,7 +29,7 @@ function App() {
       console.log("Inside Add");
       if (inputRef.current.value !== "") {
         try {
-          const response = await axios.post("http://localhost:8080/todos", {
+          const response = await axios.post("https://todolistapi-xtzp.onrender.com/todos", {
             todo: inputRef.current.value,
             isCompleted: false,
           });
@@ -43,7 +43,7 @@ function App() {
   };
   const deleteTodo = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/todos/${id}`);
+      const response = await axios.delete(`https://todolistapi-xtzp.onrender.com/todos/${id}`);
       console.log(response.data);
       const _id = response.data._id;
       console.log(_id);
@@ -64,7 +64,7 @@ function App() {
     };
     try {
       const response = await axios.patch(
-        `http://localhost:8080/todos/${id}`,
+        `https://todolistapi-xtzp.onrender.com/todos/${id}`,
         updatedTodo
       );
       console.log(response.data);
@@ -111,7 +111,7 @@ function App() {
     };
     try {
       const response = await axios.patch(
-        `http://localhost:8080/todos/${editableTodo._id}`,
+        `https://todolistapi-xtzp.onrender.com/todos/${editableTodo._id}`,
         updatedTodo
       );
       console.log(response.data);
