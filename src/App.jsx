@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/todos");
+        const response = await axios.get("https://todolistapi-xtzp.onrender.com/todos");
         setTodos(response.data);
       } catch (err) {
         console.log(err.message);
