@@ -1,18 +1,18 @@
 
 import './Todo.css'
-function Todo({id,todo,deleteTodo,completeTodo,moveUp,moveDown,updateTodo}){
+function Todo({todo,deleteTodo,completeTodo,moveUp,moveDown,updateTodo}){
   function handleDelete(){
-     deleteTodo(todo.id);
+     deleteTodo(todo._id);
   }
 
   function handleComplete(){
-    completeTodo(todo.id);
+    completeTodo(todo._id);
   }
   function handleUp(){
-    moveUp(id)
+    moveUp(todo._id)
   }
   function handleDown(){
-    moveDown(id)
+    moveDown(todo._id)
   }
 
   return (
